@@ -1,7 +1,7 @@
 "use client";
 
 import { PropsWithChildren } from 'react';
-import { ThemeProvider as NextThemeProvider, useTheme } from 'next-themes';
+import { ThemeProvider as NextThemeProvider } from 'next-themes';
 import { Inter, JetBrains_Mono } from 'next/font/google';
 import { Provider as WrapBalancerProvider } from 'react-wrap-balancer';
 
@@ -20,17 +20,13 @@ const jetBrainsMono = JetBrains_Mono({
 });
 
 export default function Providers({ children }: PropsWithChildren) {
-
   return (
     <div className={`${inter.variable} ${jetBrainsMono.variable} font-sans`}>
-
       <NextThemeProvider attribute="class">
         <WrapBalancerProvider>
           {children}
         </WrapBalancerProvider>
       </NextThemeProvider>
     </div>
-
   )
-
 }

@@ -8,7 +8,17 @@
 >
 > Feel free to leave feature suggestions but please don't open issues for bugs or support requests just yet.
 
-## Getting Started
+## Drizzle setup
+- i create the postgres db schemas in the db/ folder
+- i create a drizzle.config.ts so i can create migrations
+- i need to manually create the tables (??) by copypasting the migrated queries into the postgres console....
+    - OPS if i dont do this i get an error "error: relation does not exist"
+- then i can use the app as usual. if 
+
+
+## Todo
+- add slack hook to notify me when peole is put on a waitlinglist see [link](https://vercel.com/integrations/slack)
+- add geist theme
 - use clerk for auth?
 - what drizzle datasource to use
     - seems to use libSQL (sqlliteI) or turso
