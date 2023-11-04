@@ -17,6 +17,14 @@
 
 
 ## Todo
+- [X] add clerk for auth
+- make sure i understand the auth. 
+    - now i can go into /app and log in without being allowed
+    - maybe the (state) folder is where the magic happens?
+- whiteliste admin
+- add react-form-hook 
+- fix navbar
+- fix general UI and theme
 - add slack hook to notify me when peole is put on a waitlinglist see [link](https://vercel.com/integrations/slack)
 - add geist theme
 - use clerk for auth?

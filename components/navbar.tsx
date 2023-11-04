@@ -8,7 +8,7 @@ import { useMediaQuery } from 'usehooks-ts';
 
 import { Brand } from '@/components/brand';
 
-import { constants } from '@/lib/constants';
+import { siteConfig } from '@/app/config';
 import { HamburgerMenuIcon, TwitterLogoIcon, GitHubLogoIcon } from '@radix-ui/react-icons';
 
 export const Navbar = () => {
@@ -114,7 +114,7 @@ export const Navbar = () => {
           <li>
             <a
               target="_blank"
-              href={constants.github}
+              href={siteConfig.github}
               rel="noopener noreferrer"
               className="text-gray-11 dark:text-graydark-11 dark:hover:text-graydark-12 hover:text-gray-12 flex items-center px-2 transition-colors"
             >
@@ -124,7 +124,7 @@ export const Navbar = () => {
           <li>
             <a
               target="_blank"
-              href={constants.twitter}
+              href={siteConfig.twitter}
               rel="noopener noreferrer"
               className="text-gray-11 dark:text-graydark-11 dark:hover:text-graydark-12 hover:text-gray-12 flex items-center px-2 transition-colors"
             >
