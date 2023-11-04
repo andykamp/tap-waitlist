@@ -15,16 +15,26 @@
     - OPS if i dont do this i get an error "error: relation does not exist"
 - then i can use the app as usual. if 
 
+## Auth
+- use clerk for auth
+- set up allowed users in clerk in the restriction tab
+- can set an admin via metadata in the clerk user tab
+    - set the publicMetadata to {"role": "ADMIN"} and read from user.publicMetadata.role
 
 ## Todo
 - [X] add clerk for auth
+- [ ] make a custom invited check to see if the user is on waitlinlist or not
+    - [ ] let them login. But show them waitlinglist page 
+- [ ] add notification panel so admins can see new waitlist users
 - make sure i understand the auth. 
     - now i can go into /app and log in without being allowed
     - maybe the (state) folder is where the magic happens?
 - whiteliste admin
+- feedback componenfeedback componentt
 - add react-form-hook 
 - fix navbar
 - fix general UI and theme
+    - create 3 tap project for each theme (radix, shadUI, geist, next-ui, next-theme)
 - add slack hook to notify me when peole is put on a waitlinglist see [link](https://vercel.com/integrations/slack)
 - add geist theme
 - use clerk for auth?
@@ -36,3 +46,9 @@
 - https://www.npmjs.com/package/react-wrap-balancer
 - https://muffinman.io/react-animate-height/
 - nextUI https://nextui.org/docs/components/dropdown
+
+
+## packages
+- sonner : beautiful toasts
+- react-hook-form : forms
+- @hookform/resolvers : validation for react-hoook-form with zod

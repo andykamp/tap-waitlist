@@ -57,15 +57,18 @@ export const waitlistRouter = createTRPCRouter({
         .limit(1);
 
       if (invitation.length > 0 && invitation[0]) {
+      console.log('hiho', invitation[0].email);
         await clerkClient.allowlistIdentifiers.createAllowlistIdentifier({
           identifier: invitation[0].email,
           notify: true,
         });
+      console.log('complete', );
 
         await ctx.db
           .update(waitlist)
           .set({ invitationSentAt: new Date().toDateString() })
           .where(eq(waitlist.id, invitationId));
+      console.log('donedone', );
       }
 
       return invitation;
