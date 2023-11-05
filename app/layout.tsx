@@ -1,11 +1,9 @@
 import type { Metadata } from 'next'
-import { Inter } from 'next/font/google'
 import './globals.css'
 import Providers from './providers';
 import { ClerkProvider } from "@clerk/nextjs";
 import { dark } from "@clerk/themes";
-
-const inter = Inter({ subsets: ['latin'] })
+import { GeistSans, GeistMono } from 'geist/font'
 
 export const metadata: Metadata = {
   title: 'Create Next App',
@@ -21,8 +19,8 @@ export default function RootLayout({
     <ClerkProvider
       appearance={{ baseTheme: dark, variables: { colorPrimary: "#F9617B" } }}
     >
-      <html lang="en">
-        <body className={inter.className}>
+    <html lang="en" className={`${GeistSans.variable} ${GeistMono.variable}`}>
+        <body>
           <Providers>
             {children}
           </Providers>
