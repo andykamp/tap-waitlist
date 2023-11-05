@@ -40,7 +40,13 @@ export default authMiddleware({
       return NextResponse.redirect(new URL("/app", req.url));
     }
 
+    // redirect app to signin
     if (!auth.userId && req.nextUrl.pathname.includes("/app")) {
+      return NextResponse.redirect(new URL("/sign-in", req.url));
+    }
+
+    // redirect onboarding to signin
+    if (!auth.userId && req.nextUrl.pathname.includes("/onboarding")) {
       return NextResponse.redirect(new URL("/sign-in", req.url));
     }
 

@@ -14,6 +14,16 @@
 - i need to manually create the tables (??) by copypasting the migrated queries into the postgres console....
     - OPS if i dont do this i get an error "error: relation does not exist"
 - then i can use the app as usual. if 
+- flow is then:
+    - yarn generate (generates a migration)
+    - yarn drizzle-kit push:pg (pushes the created migration to the db AKA creates the tables)
+
+## Next server vs client
+- i can create client context providers
+- all imports inside a client MUST be clients
+- BUT i can pass a server-side child into a client since it is rendered on the server before being passed down
+- So that means that the page.tsx is by default a server evenn tho it is wrapped by client providers!
+- This means that e.g TRPC and react-query can be used in all client components and pages, but we can still render the main page with data fetches on the server
 
 ## Auth
 - use clerk for auth
@@ -32,49 +42,47 @@
             publicMetadata: { invitedFromWaitlist: true }
           })
 ```
+- NEW flow: (https://clerk.com/docs/users/metadata?utm_source=www.google.com&utm_medium=referral&utm_campaign=none)
+- dont set public-metadata attributes on signup...
+- redirect to /onboarding if user.unsafeMetadata.completedOnboarding is not set
+- create a onboarding table for the user when going to the /onboarding page
+- keep track of progress in the onboarding table
+- use the frontend to set the user.unsafeMetadata.completedOnboarding to true when done
+- how to set up tables?
+    - on signup webhooks?
+    - on demand?
+    - when logging in the first time?
+    - on onboarding page?
+- how to delete all user data?
 
 ## Todo
-- [X] add clerk for auth
 - [ ] make a custom invited check to see if the user is on waitlinlist or not
     - [ ] let them login. 
     - [ ] fetch wailinlist status while loading
     - [ ] if not accepted route to on-waitlist page 
     - [ ] if accepted let them trough to app
-- [ ] move above to the layout of the app or in a provider so it is global for all subroutes!!!
-    - [ ] can i only use google now that i dont use the allowlist?
-- [ ] add notification panel so admins can see new waitlist users
-- make sure i understand the auth. 
-    - now i can go into /app and log in without being allowed
-    - maybe the (state) folder is where the magic happens?
-- fixing email initation
-    - fix redirect
-- [X] whiteliste admin
-- [ ] add favicon
-- [ ] add assets and images to cdn so i can use it in clerk invitation
-- [ ] add notification panel so admins can get the wailtlist info
-- [ ] make mobile friendly
+- fix clerk email template and theming
 - add onboarding after login
     - add user to database
+- [ ] add notification panel so admins can see new waitlist users
+- [ ] add favicon
+- [ ] add assets and images to cdn so i can use it in clerk invitation
+    - this happends automatically in nextjs?
+- [ ] add notification panel so admins can get the wailtlist info
 - feedback componenfeedback componentt
 - add react-form-hook 
-- fix clerk email template and theming
 - fix navbar
 - fix general UI and theme
     - create 3 tap project for each theme (radix, shadUI, geist, next-ui, next-theme)
+    - [ ] make mobile friendly
 - add slack hook to notify me when peole is put on a waitlinglist see [link](https://vercel.com/integrations/slack)
-- add geist theme
-- use clerk for auth?
-- what drizzle datasource to use
-    - seems to use libSQL (sqlliteI) or turso
-        - https://github.com/tursodatabase/libsql 
-- add redis, trpc and zod
-- usehooks-ts
-- https://www.npmjs.com/package/react-wrap-balancer
-- https://muffinman.io/react-animate-height/
-- nextUI https://nextui.org/docs/components/dropdown
 
 
 ## packages
+- https://www.npmjs.com/package/react-wrap-balancer
+- https://muffinman.io/react-animate-height/
 - sonner : beautiful toasts
 - react-hook-form : forms
 - @hookform/resolvers : validation for react-hoook-form with zod
+- usehooks-ts
+- geist font

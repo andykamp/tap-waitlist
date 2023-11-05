@@ -21,15 +21,14 @@ type QuoteType = {
 
 export default async function DashboardHome() {
   const user = await currentUser();
+  // redirect to waitlist if access is not granted
   if (!user?.publicMetadata.invitedFromWaitlist) {
-    console.log('blocked',);
     redirect("/on-waitlist");
   }
-
-  console.log('user', user);
-  // const waitListItem = useWaitListAccess(user as any)
-  // console.log('waitListItem', waitListItem);
-
+  // redirect to onboarding if user has not completed it
+  if (user?.publicMetadata.onboardingComplete) {
+    redirect("/onboarding");
+  }
 
   const quote = await fetch(
     "https://api.quotable.io/random?minLength=100&maxLength=140",

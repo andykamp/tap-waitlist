@@ -82,7 +82,10 @@ export const waitlistRouter = createTRPCRouter({
           await clerkClient.invitations.createInvitation({
             emailAddress: invitation[0].email,
             redirectUrl: "http://localhost:3000/sign-up",
-            publicMetadata: { invitedFromWaitlist: true },
+            publicMetadata: {
+              invitedFromWaitlist: true,
+              onboardingComplete: false
+            },
           })
 
           // @note: note needed if we allow everybody to sign up
