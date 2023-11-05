@@ -9,7 +9,7 @@ export const waitlistRouter = createTRPCRouter({
   addToWaitlist: publicProcedure
     .input(insertWaitlist)
     .mutation(async ({ ctx, input }) => {
-    console.log('addToWaitlist', input );
+      console.log('addToWaitlist', input);
       try {
         await ctx.db.insert(waitlist).values({
           email: input.email,
@@ -17,7 +17,7 @@ export const waitlistRouter = createTRPCRouter({
           reason: input.reason,
         });
       } catch (err) {
-      console.log('err', err);
+        console.log('err', err);
         if (
           err instanceof DrizzleError &&
           err.message.includes("UNIQUE constraint")
@@ -39,6 +39,23 @@ export const waitlistRouter = createTRPCRouter({
 
     return waitList;
   }),
+  getUserWaitList: protectedProcedure
+    .input(
+      z.object({
+        email: z.string(),
+      }),
+    )
+    .query(async ({ input, ctx }) => {
+      const { email } = input;
+
+      const waitListUser = await ctx.db
+        .select()
+        .from(waitlist)
+        .where(eq(waitlist.email, email))
+        .limit(1);
+
+      return waitListUser;
+    }),
   sendUserInvitation: protectedProcedure
     .input(
       z.object({
@@ -57,18 +74,32 @@ export const waitlistRouter = createTRPCRouter({
         .limit(1);
 
       if (invitation.length > 0 && invitation[0]) {
-      console.log('hiho', invitation[0].email);
-        await clerkClient.allowlistIdentifiers.createAllowlistIdentifier({
-          identifier: invitation[0].email,
-          notify: true,
-        });
-      console.log('complete', );
+        console.log('hiho', invitation[0].email);
+        try {
 
-        await ctx.db
-          .update(waitlist)
-          .set({ invitationSentAt: new Date().toDateString() })
-          .where(eq(waitlist.id, invitationId));
-      console.log('donedone', );
+          // send a email invitation with the invitedFromWaitlist set to true
+          // this indicates that they should be allowed into the app
+          await clerkClient.invitations.createInvitation({
+            emailAddress: invitation[0].email,
+            redirectUrl: "http://localhost:3000/sign-up",
+            publicMetadata: { invitedFromWaitlist: true },
+          })
+
+          // @note: note needed if we allow everybody to sign up
+          // await clerkClient.allowlistIdentifiers.createAllowlistIdentifier({
+          //   identifier: invitation[0].email,
+          //   notify: true,
+          // });
+
+          await ctx.db
+            .update(waitlist)
+            .set({ invitationSentAt: new Date().toDateString() })
+            .where(eq(waitlist.id, invitationId));
+
+          console.log('donedone',);
+        } catch (err) {
+          console.log('err', err);
+        }
       }
 
       return invitation;

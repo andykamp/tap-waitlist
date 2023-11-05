@@ -1,5 +1,7 @@
 import { currentUser } from "@clerk/nextjs";
 import { type Metadata } from "next";
+// import useWaitListAccess from "../_components/waitlist-check";
+import { redirect } from 'next/navigation';
 // import { RecentModules } from "../_components/recent-modules";
 
 export const metadata: Metadata = {
@@ -19,6 +21,15 @@ type QuoteType = {
 
 export default async function DashboardHome() {
   const user = await currentUser();
+  if (!user?.publicMetadata.invitedFromWaitlist) {
+    console.log('blocked',);
+    redirect("/on-waitlist");
+  }
+
+  console.log('user', user);
+  // const waitListItem = useWaitListAccess(user as any)
+  // console.log('waitListItem', waitListItem);
+
 
   const quote = await fetch(
     "https://api.quotable.io/random?minLength=100&maxLength=140",
@@ -50,7 +61,7 @@ export default async function DashboardHome() {
       </p>
 
       <p>
-      Recent modules will go here
+        Recent modules will go here
       </p>
       {/* <RecentModules /> */}
     </div>

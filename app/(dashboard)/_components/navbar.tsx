@@ -14,9 +14,9 @@ export const Navbar = () => {
         className="text-default-400 hover:text-default-900"
       >
         {isOpen ? (
-          <ArrowLeftIcon />
-        ) : (
           <ArrowRightIcon />
+        ) : (
+          <ArrowLeftIcon />
         )}
       </button>
       <UserButton afterSignOutUrl="/" />

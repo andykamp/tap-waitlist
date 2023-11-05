@@ -49,7 +49,6 @@ export default authMiddleware({
   publicRoutes: [
     ...publicRoutesThatShouldRedirectAfterAuth,
     "/blocked",
-    "/editor",
     "/privacy",
     "/(api|trpc)(.*)",
   ],

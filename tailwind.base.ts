@@ -37,6 +37,7 @@ const config = {
     },
   },
   plugins: [
+    require("@tailwindcss/typography"),
     require('tailwindcss-radix-colors'),
     require('tailwindcss-animate'),
     require('@savvywombat/tailwindcss-grid-areas'),
