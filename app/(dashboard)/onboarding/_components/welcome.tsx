@@ -11,11 +11,7 @@ export default function Welcome() {
   const {
     data: dbUser,
     isLoading,
-  } = trpc.user.getUser.useQuery({
-    userId: user.id,
-    name: user.fullName || '',
-    email: user.emailAddresses[0].emailAddress,
-  });
+  } = trpc.onboarding.get.byUserId.useQuery();
 
   if (isLoading) {
     return <p>Loading...</p>;
@@ -23,7 +19,8 @@ export default function Welcome() {
 
   return (
     <div>
-      <div>User from database</div>
+      <h2>Welcome {user.fullName}!</h2>
+      <p>Lets start with a simple onbarding:</p>
       <div>{JSON.stringify(dbUser)}</div>
     </div>
   );

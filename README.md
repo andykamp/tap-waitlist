@@ -62,8 +62,12 @@
     - [ ] if not accepted route to on-waitlist page 
     - [ ] if accepted let them trough to app
 - fix clerk email template and theming
+
 - add onboarding after login
     - add user to database
+    - SHOULD USERID BE THE PRIMARY KEY
+    - add the onConflictDoNothing from https://orm.drizzle.team/docs/insert
+
 - [ ] add notification panel so admins can see new waitlist users
 - [ ] add favicon
 - [ ] add assets and images to cdn so i can use it in clerk invitation
