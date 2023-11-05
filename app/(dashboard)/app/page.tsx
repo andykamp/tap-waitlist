@@ -3,6 +3,7 @@ import { type Metadata } from "next";
 // import useWaitListAccess from "../_components/waitlist-check";
 import { redirect } from 'next/navigation';
 // import { RecentModules } from "../_components/recent-modules";
+import { siteConfig } from '@/app/config';
 
 export const metadata: Metadata = {
   title: "Dashboard Home",
@@ -26,7 +27,7 @@ export default async function DashboardHome() {
     redirect("/on-waitlist");
   }
   // redirect to onboarding if user has not completed it
-  if (user?.publicMetadata.onboardingComplete) {
+  if (!user?.unsafeMetadata[siteConfig.onboardingCompletedKey]) {
     redirect("/onboarding");
   }
 

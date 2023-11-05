@@ -1,5 +1,6 @@
 import { pgTable, text, boolean, integer } from "drizzle-orm/pg-core";
 import { createInsertSchema } from "drizzle-zod";
+import { InferInsertModel } from "drizzle-orm"
 
 export const onboarding = pgTable("onboarding", {
   userId: text("userId").primaryKey(),
@@ -16,3 +17,4 @@ export const updateOnboardingSchema = createInsertSchema(onboarding).omit({
   userId: true,
 });
 
+export type Onboarding = InferInsertModel<typeof onboarding>

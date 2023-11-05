@@ -63,7 +63,7 @@
     - [ ] if accepted let them trough to app
 - fix clerk email template and theming
 
-- add onboarding after login
+- [X] add onboarding after login
     - add user to database
     - SHOULD USERID BE THE PRIMARY KEY
     - add the onConflictDoNothing from https://orm.drizzle.team/docs/insert

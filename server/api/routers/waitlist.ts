@@ -84,7 +84,6 @@ export const waitlistRouter = createTRPCRouter({
             redirectUrl: "http://localhost:3000/sign-up",
             publicMetadata: {
               invitedFromWaitlist: true,
-              onboardingComplete: false
             },
           })
 

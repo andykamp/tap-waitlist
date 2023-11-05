@@ -10,6 +10,8 @@ type FeatureCardProps = {
 };
 
 export const siteConfig = {
+  onboardingCompletedKey: "onboardingCompleted",
+
   name: "Noodle",
   tagline: "Rethinking Student Productivity",
   description:

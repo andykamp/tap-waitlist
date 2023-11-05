@@ -1,4 +1,4 @@
-import { onboarding, insertOnboardingSchema, updateOnboardingSchema } from "@/db";
+import { onboarding, type Onboarding, insertOnboardingSchema, updateOnboardingSchema } from "@/db";
 import { createTRPCRouter, protectedProcedure } from "../trpc";
 import { eq } from "drizzle-orm";
 
@@ -27,11 +27,11 @@ export const onboardingRouter = createTRPCRouter({
             .where(eq(onboarding.userId, ctx.auth.userId))
             .limit(1);
 
-          let row;
+          let row
           if (res.length) {
             row = res.at(0);
           } else {
-          // @todo: extract and reuse create procedure
+            // @todo: extract and reuse create procedure
             row = await ctx.db
               .insert(onboarding)
               .values({
@@ -41,7 +41,7 @@ export const onboardingRouter = createTRPCRouter({
 
             console.log('CREATED ONBOARDING', row);
           }
-          return row;
+          return row as Onboarding;
         } catch (err) {
           console.error(err);
         }
@@ -74,6 +74,7 @@ export const onboardingRouter = createTRPCRouter({
               ...input
             })
             .returning();
+          console.log('updated onboarding', res);
 
           return res;
         } catch (err) {
