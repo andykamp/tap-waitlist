@@ -1,0 +1,1 @@
+ALTER TABLE "onboarding" ADD COLUMN "updated_at" timestamp DEFAULT CURRENT_TIMESTAMP(3) on update CURRENT_TIMESTAMP(3);
